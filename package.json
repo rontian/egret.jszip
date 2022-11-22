@@ -4,16 +4,100 @@
   "description": "TypeScript库项目模板",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "live-server --no-browser --watch=demo,dist",
+    "type-check": "tsc --noEmit",
+    "build": "npm run build:types && npm run build:lib && npm run build:dist",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "babel src -d lib -x \".ts,.tsx\"",
+    "build:dist": "rollup -c rollup.config.js",
+    "lint": "eslint --ext .ts,.js src --fix",
+    "precommit": "lint-staged",
+    "test": "jest"
   },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rontian/ts-module-template.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "rontian",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rontian/ts-module-template/issues"
   },
-  "homepage": "https://github.com/rontian/ts-module-template#readme"
+  "homepage": "https://github.com/rontian/ts-module-template#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@babel/plugin-proposal-optional-chaining": "^7.18.9",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@rollup/plugin-babel": "^6.0.2",
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@types/jest": "^29.2.3",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "babel-jest": "^29.3.1",
+    "del": "^7.0.0",
+    "eslint": "^8.28.0",
+    "husky": "^8.0.2",
+    "jest": "^29.3.1",
+    "lint-staged": "^13.0.3",
+    "live-server": "^1.2.2",
+    "rollup": "^2.79.1",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.9.3"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ],
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "targets": {
+                "node": "current"
+              }
+            }
+          ],
+          "@babel/preset-typescript"
+        ]
+      }
+    }
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "not dead"
+  ]
 }
