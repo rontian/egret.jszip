@@ -1,0 +1,19 @@
+{
+  "name": "ts-module-template",
+  "version": "1.0.0",
+  "description": "TypeScript库项目模板",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rontian/ts-module-template.git"
+  },
+  "author": "rontian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rontian/ts-module-template/issues"
+  },
+  "homepage": "https://github.com/rontian/ts-module-template#readme"
+}
