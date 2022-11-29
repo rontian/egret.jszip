@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import copy from 'rollup-plugin-copy';
+const mountZip = require('./mount');
 const { terser } = require('rollup-plugin-terser');
 
 const extensions = [
@@ -24,11 +25,13 @@ module.exports = {
     output: [
         {
             file: 'dist/jszip.js',
-            format: 'iife',
+            format: 'umd',
             name: 'jszip',
             // https://rollupjs.org/guide/en#output-globals-g-globals
             globals: {},
-            plugins: [],
+            plugins: [
+                //mountZip(),
+            ],
         },
         {
             file: 'dist/jszip.min.js',
@@ -38,6 +41,7 @@ module.exports = {
             globals: {},
             plugins: [
                 terser(),
+                //mountZip(),
             ],
         },
     ],

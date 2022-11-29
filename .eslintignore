@@ -4,4 +4,5 @@ config/
 test/
 build/
 *.config.js
+mount.js
 src/*.js
